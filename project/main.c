@@ -2,14 +2,13 @@
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <ctype.h>
 #include "./utils/function_utils.h"
 
 int main()
 {
     Instrumento instrumentos[ESTOQUE];
     int total = 0, proxId = 1, op;
-
-    carregar(instrumentos, &total, &proxId);
 
     do
     {
@@ -25,6 +24,7 @@ int main()
         printf("  7 - Sair\n");
         printf("=====================================\n");
         printf("Escolha uma opção: ");
+
         scanf("%d", &op);
         getchar();
 
@@ -34,7 +34,6 @@ int main()
         system("clear");
 
         switch (op)
-
         {
         case 1:
             if (total == 0)
@@ -53,6 +52,7 @@ int main()
                            instrumentos[i].preco);
                 }
             }
+
             sleep(2);
             break;
 
@@ -84,7 +84,6 @@ int main()
             }
 
             sleep(2);
-
             break;
         }
 
@@ -110,7 +109,6 @@ int main()
             }
 
             sleep(2);
-
             break;
         }
 
@@ -133,7 +131,6 @@ int main()
             }
 
             sleep(2);
-
             break;
         }
 
@@ -164,7 +161,6 @@ int main()
             }
 
             sleep(2);
-
             break;
         }
 
@@ -195,7 +191,6 @@ int main()
             }
 
             sleep(2);
-
             break;
         }
 
@@ -208,7 +203,6 @@ int main()
         }
 
         printf("-------------------------------------\n");
-
     } while (op != 7);
 
     return 0;
