@@ -10,6 +10,12 @@ int main()
     Instrumento instrumentos[ESTOQUE];
     int total = 0, proxId = 1, op;
 
+    carregar(instrumentos, &total, &proxId);
+    total == 0 ? printf("⚠️  Nenhum dado carregado. Estoque iniciado vazio.\n") : printf("✅ Dados carregados com sucesso!\n");
+
+    sleep(3);
+    system("clear");
+
     do
     {
         printf("\n=====================================\n");
@@ -40,7 +46,6 @@ int main()
             {
                 printf("Nenhum instrumento cadastrado.\n");
             }
-
             else
             {
                 for (int i = 0; i < total; i++)
@@ -77,7 +82,6 @@ int main()
                 printf("✅ Instrumento cadastrado com sucesso!\n");
                 printf("📦 Estoque disponível: %d\n", ESTOQUE - total);
             }
-
             else
             {
                 printf("❌ Erro ao cadastrar (limite atingido ou dados inválidos).\n");
@@ -102,7 +106,6 @@ int main()
             {
                 printf("✅ Preço alterado com sucesso!\n");
             }
-
             else
             {
                 printf("❌ Erro: ID inválido ou instrumento não encontrado.\n");
@@ -124,7 +127,6 @@ int main()
                 printf("✅ Instrumento removido com sucesso!\n");
                 printf("📦 Estoque disponível: %d\n", ESTOQUE - total);
             }
-
             else
             {
                 printf("❌ Erro: ID inválido ou instrumento não encontrado.\n");

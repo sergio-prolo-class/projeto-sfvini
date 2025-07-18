@@ -14,14 +14,42 @@ void salvar(Instrumento instrumentos[], int total)
 
     for (int i = 0; i < total; i++)
     {
-        fprintf(f, "%d| Nome: %s Naipe: %s R$%.2f\n",
+        fprintf(f, "%d|%s|%s|%.2f\n",
                 instrumentos[i].id,
                 instrumentos[i].nome,
                 instrumentos[i].naipe,
                 instrumentos[i].preco);
     }
 
-    fprintf(f, "\nSALVE ESSE ARQUIVO ANTES DE TERMINAR A EXECUÇÃO DO PROGRAMA!");
+    fclose(f);
+}
+
+void carregar(Instrumento instrumentos[], int *total, int *proxId)
+{
+    FILE *f = fopen(ARQ, "r");
+    if (!f)
+    {
+        *total = 0;
+        *proxId = 1;
+        return;
+    }
+
+    *total = 0;
+    *proxId = 1;
+
+    while (fscanf(f, "%d|%79[^|]|%79[^|]|%f\n",
+                  &instrumentos[*total].id,
+                  instrumentos[*total].nome,
+                  instrumentos[*total].naipe,
+                  &instrumentos[*total].preco) == 4)
+    {
+        if (instrumentos[*total].id >= *proxId)
+        {
+            *proxId = instrumentos[*total].id + 1;
+        }
+        (*total)++;
+    }
+
     fclose(f);
 }
 
@@ -38,7 +66,6 @@ bool cadastrar(Instrumento instrumentos[], char nome[], char naipe[], float prec
         {
             break;
         }
-
         if (nome[i + 1] == '\0')
         {
             return false;
@@ -64,7 +91,6 @@ bool cadastrar(Instrumento instrumentos[], char nome[], char naipe[], float prec
 
     (*total)++;
     salvar(instrumentos, *total);
-
     return true;
 }
 
@@ -106,9 +132,7 @@ bool remover(Instrumento instrumentos[], int id, int *total, int *proxId)
 
             (*total)--;
             (*proxId)--;
-
             salvar(instrumentos, *total);
-
             return true;
         }
     }
